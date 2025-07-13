@@ -19,39 +19,33 @@ namespace DSA.DP.Minimum__Maximum__Path_to_Reach_a_Target
 
         private int BottomUp(int[] days, int[] cost)
         {
-            int m = cost.Length + 1;
-            int n = days[days.Length - 1] + 1;
-            
-            int[][] dp = new int[m][];
-            for (int i = 0; i < m; i++)
-            {
-                dp[i] = new int[n];
-                dp[i][0] = 0;
-            }
-            for(int j = 0; j < n; j++)
-            {
-                dp[0][j] = int.MaxValue;
-            }
+            int n = days.Length;       
+            int[] dp = new int[n + 1];
 
-            for (int i = 1; i < m; i++)
+            for (int i = 0; i < n + 1; i++)
+                dp[i] = -1;
+
+            dp[n] = 0;
+
+            for (int i = n - 1; i >= 0; i--)
             {
-                for (int j = 1; j < n; j++)
-                {                    
-                    if (days.Contains(j))
-                    {
-                        int upval = dp[i - 1][j];
-                        int preval = dp[i][j - 1];
-                        int newcost = Math.Min(upval, preval);
-                        dp[i][j] = newcost + cost[i - 1];
-                    }
-                    else
-                    {
-                        int preval = dp[i][j - 1];
-                        dp[i][j] = preval;
-                    }
-                }
+                int singledaycost = cost[0] + dp[i + 1];
+
+                int j = i;
+                int validityOfTicket = days[j] + 7 - 1;
+                while (j < n && days[j] <= validityOfTicket)
+                    j++;
+                int weekDayCost = costs[1] + dp[j];
+
+                j = i;
+                validityOfTicket = days[j] + 30 - 1;
+                while (j < n && days[j] <= validityOfTicket)
+                    j++;
+                int monthDayCost = costs[2] + dp[j];
+
+                dp[i] = Math.Min(singledaycost, Math.Min(weekDayCost, monthDayCost));
             }
-            return dp[m - 1][n - 1];
+            return dp[0];
         }
 
         private int TopDown(int[] coins, int amount)
