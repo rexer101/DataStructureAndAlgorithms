@@ -13,24 +13,19 @@ namespace DSA.DP.Minimum__Maximum__Path_to_Reach_a_Target
             IList<IList<int>> cost = new List<IList<int>>();
             var var1 = new List<int>
             {
-                2
+                -1
             };
             var var2 = new List<int>
             {
-                3, 4
+                3, 2
             };
             var var3 = new List<int>
             {
-                6, 5, 7
-            };
-            var var4 = new List<int>
-            {
-                4, 1, 8, 3
+                -3, 1, -1
             };
             cost.Add(var1);
             cost.Add(var2);
             cost.Add(var3);
-            cost.Add(var4);
 
             Console.WriteLine(BottomUp(cost));
             Console.WriteLine(TopDown(cost));
@@ -55,17 +50,17 @@ namespace DSA.DP.Minimum__Maximum__Path_to_Reach_a_Target
 
             for (int i = 1; i < n; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j <= i; j++)
                 {
                     int left = int.MaxValue;
                     int top = int.MaxValue;
-                    int right = int.MaxValue;
+                    //int right = int.MaxValue;
 
-                    if(j - 1 > 0) left = dp[i - 1][j - 1] + triangle[i][j];
-                    top = dp[i - 1][j] + triangle[i][j];
-                    if (j + 1 < m) right = dp[i - 1][j + 1] + triangle[i][j];
+                    if(j - 1 >= 0) left = dp[i - 1][j - 1];
+                    top = dp[i - 1][j];
+                    //if (j + 1 < m) right = dp[i - 1][j + 1];
 
-                    dp[i][j] = Math.Min(left, Math.Min(top, right));
+                    dp[i][j] = Math.Min(left, top) + triangle[i][j];
 
                     if(i == n - 1) mincost = Math.Min(mincost, dp[i][j]);
                 }
