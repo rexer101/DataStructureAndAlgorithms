@@ -36,6 +36,9 @@ namespace DSA.DP.Minimum__Maximum__Path_to_Reach_a_Target
             int n = triangle.Count;
             int m = triangle[n - 1].Count;
             int mincost = int.MaxValue;
+
+            if (n == 1) return triangle[0][0];
+
             int[][] dp = new int[n][];
             for (int i = 0; i < n; i++)
             {
