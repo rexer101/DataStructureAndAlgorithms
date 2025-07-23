@@ -15,9 +15,9 @@ namespace DSA.DP.Minimum__Maximum__Path_to_Reach_a_Target
             Console.WriteLine(TopDown());
         }
 
-        private int BottomUp(string[][] input)
+        private int BottomUp(string[][] matrix)
         {
-            int n = input.Length;
+            int n = matrix.Length;
             if(n == 0) return 0;
             int m = input[0].Length;
             int max = 0;
@@ -31,7 +31,7 @@ namespace DSA.DP.Minimum__Maximum__Path_to_Reach_a_Target
             {
                 for (int j = 0; j < m; j++)
                 {
-                    if (matrix[i][j] != '1') continue;
+                    if (matrix[i][j] != "1") continue;
                     if (i == 0 || j == 0)
                     {
                         dp[i][j] = 1;
@@ -43,7 +43,7 @@ namespace DSA.DP.Minimum__Maximum__Path_to_Reach_a_Target
                     max = Math.Max(max, dp[i][j]);
                 }
             }
-            return max;
+            return max*max;
         }
 
         private int TopDown()

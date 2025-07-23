@@ -1,4 +1,4 @@
 ﻿using DSA.DP.Minimum__Maximum__Path_to_Reach_a_Target;
 
-new MaximalSquare().start();
+new TilingARectangleWithTheFewestSquares().start();
 Console.ReadLine();
