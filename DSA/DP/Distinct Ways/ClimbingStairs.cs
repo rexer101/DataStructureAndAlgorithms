@@ -10,13 +10,24 @@ namespace DSA.DP.Distinct_Ways
     {
         public void start()
         {
-            Console.WriteLine(BottomUp());
+            Console.WriteLine(BottomUp(3));
             Console.WriteLine(TopDown());
         }
 
-        private int BottomUp()
+        private int BottomUp(int n)
         {
-            return 0;
+            int a = 0;
+            int b = 1;
+            int c = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                c = a + b;
+                a = b;
+                b = c;
+            }
+
+            return b;
         }
 
         private int TopDown()
